@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/organic-5094e62e-56f6-4565-abf8-6c0f1162090e/styles.css">
+  <script src="_ds/organic-5094e62e-56f6-4565-abf8-6c0f1162090e/_ds_bundle.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+    body{margin:0;background:#e9ded0}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .om-fade{animation:fadeUp .18s ease-out}
+    .om-scroll::-webkit-scrollbar{display:none}
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;font-family:var(--font-body)">
+<x-import component-from-global-scope="AndroidDevice" from="./android-frame.jsx" hint-size="412,892">
+  <div style="height:100%;display:flex;flex-direction:column;background:var(--color-bg);position:relative;font-family:var(--font-body);color:var(--color-text);transform:scale({{ ui.a11yZoom }});transform-origin:top left;width:{{ ui.a11yWidth }};height:{{ ui.a11yHeight }};--color-text:{{ ui.a11yText }};--color-divider:{{ ui.a11yDivider }};--font-body:{{ ui.a11yFontBody }};--font-heading:{{ ui.a11yFontHeading }}">
+
+  <sc-if value="{{ ui.showLogin }}" hint-placeholder-val="{{ true }}">
+    <dc-import name="ScreenLogin" handlers="{{ handlers }}" hint-size="100%,100%"></dc-import>
+  </sc-if>
+
+  <sc-if value="{{ ui.loggedIn }}">
+    <!-- Header -->
+    <div style="flex:none;display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);background:var(--color-bg);z-index:5">
+      <sc-if value="{{ ui.showBack }}">
+        <button type="button" onClick="{{ handlers.goBack }}" aria-label="Volver" style="width:36px;height:36px;border-radius:999px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+        </button>
+      </sc-if>
+      <div style="flex:1;min-width:0">
+        <h4 style="margin:0;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" >{{ ui.title }}</h4>
+      </div>
+      <sc-if value="{{ ui.showSearchIcon }}">
+        <button type="button" onClick="{{ handlers.openSearch }}" aria-label="Buscar" style="width:36px;height:36px;border-radius:999px;border:none;background:var(--color-surface);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        </button>
+      </sc-if>
+      <sc-if value="{{ ui.showFilterIcon }}">
+        <button type="button" onClick="{{ handlers.toggleFilters }}" aria-label="Filtros" style="width:36px;height:36px;border-radius:999px;border:none;background:{{ ui.filterBtnBg }};color:{{ ui.filterBtnColor }};display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="8" x2="16" y1="12" y2="12"></line><line x1="11" x2="13" y1="18" y2="18"></line></svg>
+        </button>
+      </sc-if>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="om-scroll" style="flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:96px">
+
+      <sc-if value="{{ screens.dashboard }}" hint-placeholder-val="{{ true }}">
+        <dc-import name="ScreenDashboard" data="{{ dash }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.rooms }}">
+        <dc-import name="ScreenRooms" data="{{ roomsData }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.roomDetail }}">
+        <dc-import name="ScreenRoomDetail" data="{{ roomDetailData }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.payments }}">
+        <dc-import name="ScreenPayments" data="{{ paymentsData }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.paymentDetail }}">
+        <dc-import name="ScreenPaymentDetail" data="{{ paymentDetailData }}" handlers="{{ handlers }}" hint-size="100%,600px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.tenants }}">
+        <dc-import name="ScreenTenants" data="{{ tenantsData }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.tenantDetail }}">
+        <dc-import name="ScreenTenantDetail" data="{{ tenantDetailData }}" handlers="{{ handlers }}" hint-size="100%,800px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.more }}">
+        <dc-import name="ScreenMore" data="{{ moreData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.complexes }}">
+        <dc-import name="ScreenComplexes" data="{{ complexesData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.complexDetail }}">
+        <dc-import name="ScreenComplexDetail" data="{{ complexDetailData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.prospects }}">
+        <dc-import name="ScreenProspects" data="{{ prospectsData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.contracts }}">
+        <dc-import name="ScreenContracts" data="{{ contractsData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.services }}">
+        <dc-import name="ScreenServices" data="{{ servicesData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.maintenance }}">
+        <dc-import name="ScreenMaintenance" data="{{ maintData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.documents }}">
+        <dc-import name="ScreenDocuments" data="{{ documentsData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.reports }}">
+        <dc-import name="ScreenReports" data="{{ reportsData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.settings }}">
+        <dc-import name="ScreenSettings" data="{{ settingsData }}" handlers="{{ handlers }}" hint-size="100%,700px"></dc-import>
+      </sc-if>
+
+      <sc-if value="{{ screens.accounts }}">
+        <dc-import name="ScreenAccounts" data="{{ accountsData }}" handlers="{{ handlers }}" hint-size="100%,600px"></dc-import>
+      </sc-if>
+
+    </div>
+
+    <!-- FAB -->
+    <sc-if value="{{ ui.showFab }}">
+      <div style="position:absolute;right:16px;bottom:80px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;z-index:20">
+        <sc-if value="{{ ui.fabOpen }}">
+          <div class="om-fade" style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+            <button type="button" onClick="{{ handlers.openAddPayment }}" style="display:flex;align-items:center;gap:8px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:999px;padding:9px 16px 9px 10px;box-shadow:var(--shadow-md);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--color-text)">
+              <span style="width:28px;height:28px;border-radius:999px;background:var(--color-accent-2-100);color:var(--color-accent-2-800);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></span>
+              Registrar pago
+            </button>
+            <button type="button" onClick="{{ handlers.openAddTenant }}" style="display:flex;align-items:center;gap:8px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:999px;padding:9px 16px 9px 10px;box-shadow:var(--shadow-md);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--color-text)">
+              <span style="width:28px;height:28px;border-radius:999px;background:var(--color-accent-100);color:var(--color-accent-800);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+              Nuevo inquilino
+            </button>
+            <button type="button" onClick="{{ handlers.openAddRoom }}" style="display:flex;align-items:center;gap:8px;background:var(--color-bg);border:1px solid var(--color-divider);border-radius:999px;padding:9px 16px 9px 10px;box-shadow:var(--shadow-md);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--color-text)">
+              <span style="width:28px;height:28px;border-radius:999px;background:var(--color-neutral-200);color:var(--color-neutral-800);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path></svg></span>
+              Nueva habitación
+            </button>
+          </div>
+        </sc-if>
+        <button type="button" onClick="{{ handlers.toggleFab }}" aria-label="Acciones rápidas" style="width:56px;height:56px;border-radius:999px;background:var(--color-accent);color:var(--color-bg);border:none;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;cursor:pointer;transform:{{ ui.fabRotate }}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+        </button>
+      </div>
+    </sc-if>
+
+    <!-- Bottom nav -->
+    <div style="flex:none;display:flex;align-items:stretch;border-top:1px solid var(--color-divider);background:var(--color-bg);position:relative;z-index:10">
+      <button type="button" onClick="{{ handlers.goDashboard }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 10px;border:none;background:transparent;cursor:pointer;color:{{ ui.navColors.dashboard }}">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"></path></svg>
+        <span style="font-size:10.5px">Inicio</span>
+      </button>
+      <button type="button" onClick="{{ handlers.goRooms }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 10px;border:none;background:transparent;cursor:pointer;color:{{ ui.navColors.rooms }}">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-4"></path></svg>
+        <span style="font-size:10.5px">Habitaciones</span>
+      </button>
+      <button type="button" onClick="{{ handlers.goPayments }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 10px;border:none;background:transparent;cursor:pointer;color:{{ ui.navColors.payments }}">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        <span style="font-size:10.5px">Pagos</span>
+      </button>
+      <button type="button" onClick="{{ handlers.goTenants }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 10px;border:none;background:transparent;cursor:pointer;color:{{ ui.navColors.tenants }}">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span style="font-size:10.5px">Inquilinos</span>
+      </button>
+      <button type="button" onClick="{{ handlers.goMore }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 10px;border:none;background:transparent;cursor:pointer;color:{{ ui.navColors.more }}">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="19" cy="12" r="1.6"></circle></svg>
+        <span style="font-size:10.5px">Más</span>
+      </button>
+    </div>
+
+    <!-- Toast -->
+    <sc-if value="{{ ui.toast }}">
+      <div class="om-fade" style="position:absolute;left:50%;transform:translateX(-50%);bottom:100px;background:var(--color-neutral-900);color:var(--color-neutral-100);padding:9px 16px;border-radius:999px;font-size:12.5px;box-shadow:var(--shadow-lg);z-index:60;white-space:nowrap">{{ ui.toast }}</div>
+    </sc-if>
+
+    <!-- Modals -->
+    <sc-if value="{{ ui.modal }}">
+      <dc-import name="AppModal" modal="{{ ui.modal }}" data="{{ modalData }}" handlers="{{ handlers }}" hint-size="100%,100%"></dc-import>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ ui.showOnboarding }}">
+    <dc-import name="OnboardingTour" data="{{ onboardingData }}" hint-size="100%,100%"></dc-import>
+  </sc-if>
+
+  </div>
+</x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;colorAvailable&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#A8D8B9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colores de estado (semáforo)&quot;},&quot;colorOccupied&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F4A9A0&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colores de estado (semáforo)&quot;},&quot;colorReserved&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F6D186&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colores de estado (semáforo)&quot;},&quot;colorMaintenance&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9C4BB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colores de estado (semáforo)&quot;}}">
+class Component extends DCLogic {
+  state = {
+    loaded: false,
+    screen: 'dashboard', backScreen: null,
+    complexes: [], rooms: [], tenants: [], prospects: [], contracts: [], payments: [],
+    services: [], maintenance: [], incidents: [], documents: [], bankAccounts: {},
+    notifications: [], activity: [], calendarEvents: [],
+    selectedRoomId: null, selectedTenantId: null, selectedComplexId: null, selectedPaymentId: null,
+    roomFilters: { complex: 'all', status: 'all', furnished: 'all', maxPrice: 16000 },
+    roomsFilterOpen: false, roomsView: 'list',
+    tenantsTab: 'active', tenantsQuery: '',
+    paymentsTab: 'all', paymentsQuery: '',
+    prospectsFilter: 'all',
+    contractsFilter: 'all',
+    servicesComplexFilter: 'all',
+    maintTab: 'maintenance',
+    docsCategory: null,
+    settingsComplexId: null,
+    settingsState: {},
+    a11y: { fontSize: 'normal', readableFont: false, highContrast: false },
+    reminderTemplate: 'Hola {nombre}, te recordamos que tu pago de renta de {monto} vence el {fecha}. ¡Gracias!',
+    session: null, showOnboarding: false, onboardingStep: 0,
+    fabOpen: false,
+    modal: null,
+    toast: null,
+    addPaymentForm: { tenantId: '', amount: '', method: 'Transferencia', status: 'pending' },
+    addTenantForm: { name: '', phone: '', email: '', occupation: '', roomId: '' },
+    addRoomForm: { complexId: '', number: '', name: '', type: 'Habitación privada', rent: '', furnished: false },
+    addComplexForm: { name: '', address: '', mapsLink: '', manager: '', phone: '', notes: '' },
+    accounts: [],
+    addAccountForm: { type: 'bank', alias: '', complexId: '', bank: '', holder: '', clabe: '', account: '', selectedRoomIds: [] },
+    withdrawForm: { amount: '', note: '' },
+    selectedAccountId: null,
+    moveOutDate: '',
+  };
+
+  componentDidMount() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('pm_a11y') || 'null');
+      if (saved) this.state.a11y = saved;
+    } catch (e) {}
+    try {
+      const t = localStorage.getItem('pm_reminder_template');
+      if (t) this.state.reminderTemplate = t;
+    } catch (e) {}
+    const savedSession = localStorage.getItem('pm_session');
+    if (savedSession) { this.setState({ session: savedSession }); this.loadData(savedSession); }
+  }
+  loadData(mode) {
+    if (mode === 'empty') {
+      this.setState({
+        loaded: true, complexes: [], rooms: [], tenants: [], prospects: [], contracts: [], payments: [],
+        services: [], maintenance: [], incidents: [], documents: [], accounts: [], notifications: [],
+        activity: [], calendarEvents: [], settingsComplexId: null,
+      });
+      this.maybeShowOnboarding();
+      return;
+    }
+    import('./sample-data.js').then(m => {
+      this.sampleData = m;
+      this.setState({
+        loaded: true, complexes: m.COMPLEXES, rooms: m.ROOMS, tenants: m.TENANTS, prospects: m.PROSPECTS,
+        contracts: m.CONTRACTS, payments: m.PAYMENTS, services: m.SERVICES, maintenance: m.MAINTENANCE,
+        incidents: m.INCIDENTS, documents: m.DOCUMENTS, accounts: [], notifications: m.NOTIFICATIONS,
+        activity: m.ACTIVITY, calendarEvents: m.CALENDAR_EVENTS, settingsComplexId: m.COMPLEXES[0].id,
+      });
+      this.maybeShowOnboarding();
+      const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
+      Promise.race([import('./db.js'), timeout(6000)]).then(async (db) => {
+        this.db = db;
+        let data = await Promise.race([db.loadAll(), timeout(6000)]);
+        if (!data.complexes.length) {
+          await db.seedAll(m);
+          data = await db.loadAll();
+        }
+        this.setState({
+          complexes: data.complexes, rooms: data.rooms, tenants: data.tenants, prospects: data.prospects,
+          contracts: data.contracts, payments: data.payments, services: data.services,
+          maintenance: data.maintenance, incidents: data.incidents, documents: data.documents,
+          accounts: data.accounts, settingsComplexId: data.complexes[0] ? data.complexes[0].id : this.state.settingsComplexId,
+        });
+      }).catch(err => { console.error('Supabase unavailable, staying on local data', err); this.db = null; });
+    });
+  }
+  maybeShowOnboarding() {
+    if (!localStorage.getItem('pm_onboarding_seen')) this.setState({ showOnboarding: true, onboardingStep: 0 });
+  }
+  findAccountForRoom(room) {
+    if (!room) return null;
+    const S = this.state;
+    return S.accounts.find(a => a.roomIds && a.roomIds.includes(room.id))
+      || S.accounts.find(a => a.complexId === room.complexId && (!a.roomIds || a.roomIds.length === 0))
+      || S.accounts.find(a => a.complexId === room.complexId) || null;
+  }
+  addMovement = (accountId, amount, type, note) => {
+    if (!accountId || !amount) return;
+    let newBalance = 0;
+    const mv = { id: 'mv' + Date.now(), date: new Date().toISOString().slice(0, 10), amount, type, note };
+    this.setState({
+      accounts: this.state.accounts.map(a => {
+        if (a.id !== accountId) return a;
+        newBalance = a.balance + (type === 'deposit' ? amount : -amount);
+        return { ...a, balance: newBalance, movements: [mv, ...a.movements] };
+      }),
+    });
+    if (this.db) { this.db.insertMovement(accountId, mv).catch(e => console.error(e)); this.db.updateAccountBalance(accountId, newBalance).catch(e => console.error(e)); }
+  };
+
+  // ---- status meta helpers ----
+  roomStatusMeta(s) {
+    const p = this.props || {};
+    const m = {
+      available: { label: 'Disponible', color: p.colorAvailable ?? '#A8D8B9' },
+      reserved: { label: 'Reservada', color: p.colorReserved ?? '#F6D186' },
+      soon: { label: 'Próx. disponible', color: '#cf8a4a' },
+      occupied: { label: 'Ocupada', color: p.colorOccupied ?? '#F4A9A0' },
+      maintenance: { label: 'Mantenimiento', color: p.colorMaintenance ?? '#C9C4BB' },
+    };
+    return m[s] || m.available;
+  }
+  paymentStatusMeta(s) {
+    const m = {
+      paid: { label: 'Pagado', color: '#7a9b6e' },
+      pending: { label: 'Pendiente', color: '#d4a13d' },
+      partial: { label: 'Parcial', color: '#cf8a4a' },
+      overdue: { label: 'Vencido', color: '#b5544a' },
+    };
+    return m[s] || m.pending;
+  }
+  contractStatusMeta(s) {
+    const m = {
+      active: { label: 'Activo', color: '#7a9b6e' },
+      expiring: { label: 'Por vencer', color: '#d4a13d' },
+      ended: { label: 'Finalizado', color: '#8a8478' },
+    };
+    return m[s] || m.active;
+  }
+  serviceStatusMeta(s) {
+    const m = {
+      al_corriente: { label: 'Al corriente', color: '#7a9b6e' },
+      pendiente: { label: 'Pendiente', color: '#d4a13d' },
+      vencido: { label: 'Vencido', color: '#b5544a' },
+    };
+    return m[s] || m.al_corriente;
+  }
+  maintStatusMeta(s) {
+    const m = {
+      programado: { label: 'Programado', color: '#8a8478' },
+      en_progreso: { label: 'En progreso', color: '#d4a13d' },
+      completado: { label: 'Completado', color: '#7a9b6e' },
+    };
+    return m[s] || m.programado;
+  }
+  incidentMeta(s) {
+    const m = {
+      abierto: { label: 'Abierto', color: '#b5544a' },
+      en_progreso: { label: 'En progreso', color: '#d4a13d' },
+      resuelto: { label: 'Resuelto', color: '#7a9b6e' },
+    };
+    return m[s] || m.abierto;
+  }
+  priorityMeta(s) {
+    const m = { alta: { label: 'Alta', color: '#b5544a' }, media: { label: 'Media', color: '#d4a13d' }, baja: { label: 'Baja', color: '#7a9b6e' } };
+    return m[s] || m.media;
+  }
+  prospectMeta(s) {
+    const m = {
+      new: { label: 'Nuevo' }, visit_scheduled: { label: 'Visita agendada' }, visited: { label: 'Visitado' },
+      reserved: { label: 'Apartado' }, became_tenant: { label: 'Se volvió inquilino' }, not_interested: { label: 'No interesado' },
+    };
+    return m[s] || m.new;
+  }
+  money(n) { return '$' + Number(n || 0).toLocaleString('es-MX'); }
+  MONTHS_ES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  nextMonthDate(dateStr) {
+    if (!dateStr) return dateStr;
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setMonth(d.getMonth() + 1);
+    return d.toISOString().slice(0, 10);
+  }
+  nextPeriodLabel(period) {
+    const [name, year] = (period || '').split(' ');
+    const idx = this.MONTHS_ES.indexOf(name);
+    if (idx === -1) return period;
+    const nextIdx = (idx + 1) % 12;
+    const nextYear = nextIdx === 0 ? Number(year) + 1 : Number(year);
+    return this.MONTHS_ES[nextIdx] + ' ' + nextYear;
+  }
+  complexName(id) { const c = this.state.complexes.find(x => x.id === id); return c ? c.name : ''; }
+  roomLabel(id) { const r = this.state.rooms.find(x => x.id === id); return r ? (r.name + ' · ' + r.number) : '—'; }
+  tenantName(id) { const t = this.state.tenants.find(x => x.id === id); return t ? t.name : '—'; }
+
+  nav = (screen, extra) => { this.setState({ screen, backScreen: this.state.screen, ...(extra || {}) }); };
+  navRoot = (screen) => { this.setState({ screen, backScreen: null, fabOpen: false }); };
+  goBack = () => { this.setState({ screen: this.state.backScreen || 'dashboard', backScreen: null }); };
+  toast = (msg) => { this.setState({ toast: msg }); setTimeout(() => this.setState({ toast: null }), 2200); };
+  closeModal = () => this.setState({ modal: null });
+
+  render() {}
+
+  renderVals() {
+    const S = this.state;
+    const h = {
+      goBack: this.goBack,
+      toast: this.toast,
+      loginDemo: () => { localStorage.setItem('pm_session', 'demo'); this.setState({ session: 'demo' }); this.loadData('demo'); },
+      loginEmpty: () => { localStorage.setItem('pm_session', 'empty'); this.setState({ session: 'empty' }); this.loadData('empty'); },
+      logout: () => { localStorage.removeItem('pm_session'); this.setState({ session: null, loaded: false, screen: 'dashboard', backScreen: null }); },
+      nextOnboarding: () => {
+        const steps = 5;
+        if (S.onboardingStep < steps - 1) this.setState({ onboardingStep: S.onboardingStep + 1 });
+        else { localStorage.setItem('pm_onboarding_seen', '1'); this.setState({ showOnboarding: false }); }
+      },
+      prevOnboarding: () => this.setState({ onboardingStep: Math.max(0, S.onboardingStep - 1) }),
+      skipOnboarding: () => { localStorage.setItem('pm_onboarding_seen', '1'); this.setState({ showOnboarding: false }); },
+      replayOnboarding: () => this.setState({ showOnboarding: true, onboardingStep: 0 }),
+      goDashboard: () => this.navRoot('dashboard'),
+      goRooms: () => this.navRoot('rooms'),
+      goPayments: () => this.navRoot('payments'),
+      goTenants: () => this.navRoot('tenants'),
+      goMore: () => this.navRoot('more'),
+      openSearch: () => this.setState({ modal: 'search' }),
+      toggleFilters: () => this.setState({ roomsFilterOpen: !S.roomsFilterOpen }),
+      toggleFab: () => this.setState({ fabOpen: !S.fabOpen }),
+      openAddPayment: () => this.setState({ modal: 'addPayment', fabOpen: false }),
+      openAddTenant: () => this.setState({ modal: 'addTenant', fabOpen: false }),
+      openAddRoom: () => this.setState({ modal: 'addRoom', fabOpen: false }),
+      openAddComplex: () => this.setState({ modal: 'addComplex', fabOpen: false }),
+      openAddAccount: () => this.setState({ modal: 'addAccount' }),
+      openWithdraw: (accountId) => this.setState({ modal: 'withdraw', selectedAccountId: accountId, withdrawForm: { amount: '', note: '' } }),
+      closeModal: this.closeModal,
+
+      openRoomDetail: (id) => this.nav('roomDetail', { selectedRoomId: id }),
+      openTenantDetail: (id) => this.nav('tenantDetail', { selectedTenantId: id }),
+      openComplexDetail: (id) => this.nav('complexDetail', { selectedComplexId: id }),
+      openPaymentDetail: (id) => this.nav('paymentDetail', { selectedPaymentId: id }),
+      openComplexes: () => this.nav('complexes'),
+      openProspects: () => this.nav('prospects'),
+      openContracts: () => this.nav('contracts'),
+      openServices: () => this.nav('services'),
+      openMaintenance: () => this.nav('maintenance'),
+      openDocuments: () => this.nav('documents'),
+      openReports: () => this.nav('reports'),
+      openSettings: () => this.nav('settings'),
+      openAccounts: () => this.nav('accounts'),
+
+      goStatComplexes: () => this.nav('complexes'),
+      goStatRoomsAll: () => { this.setState({ roomFilters: { complex: 'all', status: 'all', furnished: 'all', maxPrice: 16000 } }); this.navRoot('rooms'); },
+      goStatAvailable: () => { this.setState({ roomFilters: { complex: 'all', status: 'available', furnished: 'all', maxPrice: 16000 } }); this.navRoot('rooms'); },
+      goStatOccupied: () => { this.setState({ roomFilters: { complex: 'all', status: 'occupied', furnished: 'all', maxPrice: 16000 } }); this.navRoot('rooms'); },
+      goStatReserved: () => { this.setState({ roomFilters: { complex: 'all', status: 'reserved', furnished: 'all', maxPrice: 16000 } }); this.navRoot('rooms'); },
+      goStatMaintenance: () => { this.setState({ roomFilters: { complex: 'all', status: 'maintenance', furnished: 'all', maxPrice: 16000 } }); this.navRoot('rooms'); },
+      setRoomsView: (v) => this.setState({ roomsView: v }),
+      setRoomFilterComplex: (v) => this.setState({ roomFilters: { ...S.roomFilters, complex: v } }),
+      setRoomFilterStatus: (v) => this.setState({ roomFilters: { ...S.roomFilters, status: S.roomFilters.status === v ? 'all' : v } }),
+      setRoomFilterFurnished: (v) => this.setState({ roomFilters: { ...S.roomFilters, furnished: v } }),
+      setRoomFilterPrice: (v) => this.setState({ roomFilters: { ...S.roomFilters, maxPrice: Number(v) } }),
+      clearRoomFilters: () => this.setState({ roomFilters: { complex: 'all', status: 'all', furnished: 'all', maxPrice: 16000 } }),
+      openShare: (id) => this.setState({ modal: 'shareRoom', selectedRoomId: id }),
+      changeRoomStatus: (id, status) => {
+        this.setState({ rooms: S.rooms.map(r => r.id === id ? { ...r, status } : r) });
+        if (this.db) this.db.updateRoom(id, { status }).catch(e => console.error(e));
+        this.toast('Estado de habitación actualizado');
+      },
+
+      setTenantsTab: (t) => this.setState({ tenantsTab: t }),
+      setTenantsQuery: (q) => this.setState({ tenantsQuery: q }),
+      askInactivate: (id) => this.setState({ modal: 'confirmInactive', selectedTenantId: id, moveOutDate: new Date().toISOString().slice(0, 10) }),
+      setMoveOutDate: (v) => this.setState({ moveOutDate: v }),
+      confirmInactivate: () => {
+        const t = S.tenants.find(x => x.id === S.selectedTenantId);
+        if (!t) return;
+        this.setState({
+          tenants: S.tenants.map(x => x.id === t.id ? { ...x, active: false, moveOut: S.moveOutDate, roomId: null } : x),
+          rooms: S.rooms.map(r => r.id === t.roomId ? { ...r, status: 'available', availableFrom: S.moveOutDate } : r),
+          modal: null,
+        });
+        if (this.db) {
+          this.db.updateTenant(t.id, { active: false, move_out: S.moveOutDate, room_id: null }).catch(e => console.error(e));
+          this.db.updateRoom(t.roomId, { status: 'available', available_from: S.moveOutDate }).catch(e => console.error(e));
+          this.db.closeTenantHistory(t.roomId, S.moveOutDate).catch(e => console.error(e));
+        }
+        this.toast('Inquilino marcado como inactivo');
+      },
+
+      setPaymentsTab: (t) => this.setState({ paymentsTab: t }),
+      setPaymentsQuery: (q) => this.setState({ paymentsQuery: q }),
+      askMarkPaid: (id) => this.setState({ modal: 'confirmMarkPaid', selectedPaymentId: id }),
+      confirmMarkPaid: () => {
+        const p = S.payments.find(x => x.id === S.selectedPaymentId);
+        if (!p) return;
+        const today = new Date().toISOString().slice(0, 10);
+        const updated = S.payments.map(pp => pp.id === p.id ? { ...pp, status: 'paid', paymentDate: today } : pp);
+        const nextPeriod = this.nextPeriodLabel(p.period);
+        const nextDue = this.nextMonthDate(p.dueDate);
+        const nextPayment = { id: 'pg' + Date.now(), tenantId: p.tenantId, roomId: p.roomId, period: nextPeriod, dueDate: nextDue, paymentDate: null, amount: p.amount, method: '—', status: 'pending', receipts: [] };
+        this.setState({ payments: [nextPayment, ...updated], modal: null });
+        if (this.db) {
+          this.db.updatePayment(p.id, { status: 'paid', payment_date: today }).catch(e => console.error(e));
+          this.db.insertPayment(nextPayment).catch(e => console.error(e));
+        }
+        const rm = S.rooms.find(r => r.id === p.roomId);
+        const acc = this.findAccountForRoom(rm);
+        if (acc) this.addMovement(acc.id, p.amount, 'deposit', this.tenantName(p.tenantId) + ' · ' + p.period);
+        this.toast('Pago marcado como pagado · próximo pago generado para ' + nextPeriod);
+      },
+
+      setProspectsFilter: (v) => this.setState({ prospectsFilter: v }),
+      setProspectStatus: (id, status) => {
+        this.setState({ prospects: S.prospects.map(p => p.id === id ? { ...p, status } : p) });
+        if (this.db) this.db.updateProspectStatus(id, status).catch(e => console.error(e));
+        this.toast('Estado del prospecto actualizado');
+      },
+
+      setContractsFilter: (v) => this.setState({ contractsFilter: v }),
+      setServicesComplexFilter: (v) => this.setState({ servicesComplexFilter: v }),
+      markServicePaid: (id) => {
+        this.setState({ services: S.services.map(sv => sv.id === id ? { ...sv, status: 'al_corriente' } : sv) });
+        if (this.db) this.db.updateService(id, { status: 'al_corriente' }).catch(e => console.error(e));
+        this.toast('Servicio marcado al corriente');
+      },
+
+      setMaintTab: (t) => this.setState({ maintTab: t }),
+      cycleMaintStatus: (id) => {
+        const order = ['programado', 'en_progreso', 'completado'];
+        let next = null;
+        this.setState({ maintenance: S.maintenance.map(m => { if (m.id !== id) return m; const i = order.indexOf(m.status); next = order[(i + 1) % order.length]; return { ...m, status: next }; }) });
+        if (this.db && next) this.db.updateMaintenance(id, { status: next }).catch(e => console.error(e));
+      },
+      cycleIncidentStatus: (id) => {
+        const order = ['abierto', 'en_progreso', 'resuelto'];
+        let next = null;
+        this.setState({ incidents: S.incidents.map(m => { if (m.id !== id) return m; const i = order.indexOf(m.status); next = order[(i + 1) % order.length]; return { ...m, status: next }; }) });
+        if (this.db && next) this.db.updateIncident(id, { status: next }).catch(e => console.error(e));
+      },
+
+      setDocsCategory: (c) => this.setState({ docsCategory: c }),
+
+      setSettingsComplex: (id) => this.setState({ settingsComplexId: id }),
+      setFontSize: (size) => { const a = { ...S.a11y, fontSize: size }; this.setState({ a11y: a }); localStorage.setItem('pm_a11y', JSON.stringify(a)); },
+      toggleReadableFont: () => { const a = { ...S.a11y, readableFont: !S.a11y.readableFont }; this.setState({ a11y: a }); localStorage.setItem('pm_a11y', JSON.stringify(a)); },
+      toggleHighContrast: () => { const a = { ...S.a11y, highContrast: !S.a11y.highContrast }; this.setState({ a11y: a }); localStorage.setItem('pm_a11y', JSON.stringify(a)); },
+      updateReminderTemplate: (e) => { const v = e.target.value; this.setState({ reminderTemplate: v }); localStorage.setItem('pm_reminder_template', v); },
+      sendReminder: (tenant, amount, dueDate) => {
+        const digits = (s) => (s || '').replace(/\D/g, '');
+        const msg = S.reminderTemplate
+          .replace('{nombre}', tenant.name || '')
+          .replace('{monto}', amount != null ? this.money(amount) : '')
+          .replace('{fecha}', dueDate || '');
+        window.open('https://wa.me/52' + digits(tenant.whatsapp || tenant.phone) + '?text=' + encodeURIComponent(msg), '_blank');
+      },
+      toggleSetting: (key) => {
+        const cur = S.settingsState[S.settingsComplexId] || {};
+        this.setState({ settingsState: { ...S.settingsState, [S.settingsComplexId]: { ...cur, [key]: !cur[key] } } });
+      },
+
+      updateAddPaymentForm: (field, v) => this.setState({ addPaymentForm: { ...S.addPaymentForm, [field]: v } }),
+      submitAddPayment: () => {
+        const f = S.addPaymentForm;
+        if (!f.tenantId || !f.amount) { this.toast('Completa inquilino y monto'); return; }
+        const t = S.tenants.find(x => x.id === f.tenantId);
+        const p = { id: 'pg' + Date.now(), tenantId: f.tenantId, roomId: t ? t.roomId : null, period: 'Julio 2026', dueDate: '2026-07-05', paymentDate: new Date().toISOString().slice(0, 10), amount: Number(f.amount), method: f.method, status: f.status, receipts: [] };
+        this.setState({ payments: [p, ...S.payments], modal: null, addPaymentForm: { tenantId: '', amount: '', method: 'Transferencia', status: 'pending' } });
+        if (this.db) this.db.insertPayment(p).catch(e => console.error(e));
+        if ((f.status === 'paid' || f.status === 'partial') && t) {
+          const rm = S.rooms.find(r => r.id === t.roomId);
+          const acc = this.findAccountForRoom(rm);
+          if (acc) this.addMovement(acc.id, Number(f.amount), 'deposit', t.name + ' · ' + p.period);
+        }
+        this.toast('Pago registrado' + ((f.status === 'paid' || f.status === 'partial') ? ' y abonado a la cuenta' : ''));
+      },
+      updateAddTenantForm: (field, v) => this.setState({ addTenantForm: { ...S.addTenantForm, [field]: v } }),
+      submitAddTenant: () => {
+        const f = S.addTenantForm;
+        if (!f.name || !f.roomId) { this.toast('Completa nombre y habitación'); return; }
+        const id = 'tnew' + Date.now();
+        const t = { id, name: f.name, initials: f.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase(), curp: '', rfc: '', birthDate: '', phone: f.phone, whatsapp: f.phone, email: f.email, occupation: f.occupation, employer: '', active: true, roomId: f.roomId, moveIn: new Date().toISOString().slice(0, 10), notes: '', emergency: { name: '', relation: '', phone: '', address: '' }, history: [{ roomId: f.roomId, label: this.roomLabel(f.roomId), start: new Date().toISOString().slice(0, 10), end: null }] };
+        this.setState({
+          tenants: [t, ...S.tenants],
+          rooms: S.rooms.map(r => r.id === f.roomId ? { ...r, status: 'occupied' } : r),
+          modal: null, addTenantForm: { name: '', phone: '', email: '', occupation: '', roomId: '' },
+        });
+        if (this.db) { this.db.insertTenant(t).catch(e => console.error(e)); this.db.updateRoom(f.roomId, { status: 'occupied' }).catch(e => console.error(e)); }
+        this.toast('Inquilino agregado');
+      },
+      updateAddComplexForm: (field, v) => this.setState({ addComplexForm: { ...S.addComplexForm, [field]: v } }),
+      updateAddAccountForm: (field, v) => this.setState({ addAccountForm: { ...S.addAccountForm, [field]: v } }),
+      toggleAddAccountRoom: (roomId) => {
+        const cur = S.addAccountForm.selectedRoomIds;
+        const next = cur.includes(roomId) ? cur.filter(id => id !== roomId) : [...cur, roomId];
+        this.setState({ addAccountForm: { ...S.addAccountForm, selectedRoomIds: next } });
+      },
+      submitAddAccount: () => {
+        const f = S.addAccountForm;
+        if (!f.alias) { this.toast('Escribe un alias para la cuenta'); return; }
+        const acc = {
+          id: 'acc' + Date.now(), type: f.type, complexId: f.complexId || null, roomIds: f.selectedRoomIds,
+          bank: f.type === 'bank' ? f.bank : '', holder: f.type === 'bank' ? f.holder : '', clabe: f.type === 'bank' ? f.clabe : '',
+          account: f.type === 'bank' ? f.account : '', card: '', alias: f.alias, balance: 0, movements: [],
+        };
+        this.setState({ accounts: [acc, ...S.accounts], modal: null, addAccountForm: { type: 'bank', alias: '', complexId: '', bank: '', holder: '', clabe: '', account: '', selectedRoomIds: [] } });
+        if (this.db) this.db.insertAccount(acc).catch(e => console.error(e));
+        this.toast('Cuenta agregada');
+      },
+      updateWithdrawForm: (field, v) => this.setState({ withdrawForm: { ...S.withdrawForm, [field]: v } }),
+      submitWithdraw: () => {
+        const acc = S.accounts.find(a => a.id === S.selectedAccountId);
+        const amt = Number(S.withdrawForm.amount);
+        if (!acc || !amt || amt <= 0) { this.toast('Ingresa un monto válido'); return; }
+        if (amt > acc.balance) { this.toast('Fondos insuficientes en esa cuenta'); return; }
+        this.addMovement(acc.id, amt, 'withdrawal', S.withdrawForm.note || 'Retiro');
+        this.setState({ modal: null });
+        this.toast('Retiro registrado');
+      },
+      submitAddComplex: () => {
+        const f = S.addComplexForm;
+        if (!f.name || !f.address) { this.toast('Completa nombre y dirección'); return; }
+        const c = { id: 'cnew' + Date.now(), name: f.name, address: f.address, mapsLink: f.mapsLink || '', manager: f.manager || '—', phone: f.phone || '—', notes: f.notes || '' };
+        this.setState({ complexes: [c, ...S.complexes], modal: null, addComplexForm: { name: '', address: '', mapsLink: '', manager: '', phone: '', notes: '' } });
+        if (this.db) this.db.insertComplex(c).catch(e => console.error(e));
+        this.toast('Complejo agregado');
+      },
+      updateAddRoomForm: (field, v) => this.setState({ addRoomForm: { ...S.addRoomForm, [field]: v } }),
+      submitAddRoom: () => {
+        const f = S.addRoomForm;
+        if (!f.complexId || !f.number || !f.rent) { this.toast('Completa complejo, número y renta'); return; }
+        const r = { id: 'rnew' + Date.now(), complexId: f.complexId, number: f.number, name: f.name || ('Habitación ' + f.number), floor: 1, type: f.type, size: 15, rent: Number(f.rent), deposit: Number(f.rent), included: [], furnished: !!f.furnished, status: 'available', availableFrom: new Date().toISOString().slice(0, 10), contractEnd: null, tags: f.furnished ? ['Amueblada'] : [], description: '' };
+        this.setState({ rooms: [r, ...S.rooms], modal: null, addRoomForm: { complexId: '', number: '', name: '', type: 'Habitación privada', rent: '', furnished: false } });
+        if (this.db) this.db.insertRoom(r).catch(e => console.error(e));
+        this.toast('Habitación creada');
+      },
+    };
+
+    const screen = S.screen;
+    const screens = {
+      dashboard: screen === 'dashboard', rooms: screen === 'rooms', roomDetail: screen === 'roomDetail',
+      payments: screen === 'payments', paymentDetail: screen === 'paymentDetail',
+      tenants: screen === 'tenants', tenantDetail: screen === 'tenantDetail', more: screen === 'more',
+      complexes: screen === 'complexes', complexDetail: screen === 'complexDetail',
+      prospects: screen === 'prospects', contracts: screen === 'contracts', services: screen === 'services',
+      maintenance: screen === 'maintenance', documents: screen === 'documents', reports: screen === 'reports',
+      settings: screen === 'settings', accounts: screen === 'accounts',
+    };
+    const titles = {
+      dashboard: 'Hola, Laura 👋'.replace(' 👋', ''), rooms: 'Habitaciones', roomDetail: 'Detalle de habitación',
+      payments: 'Pagos', paymentDetail: 'Detalle de pago', tenants: 'Inquilinos', tenantDetail: 'Perfil de inquilino',
+      more: 'Más', complexes: 'Complejos', complexDetail: 'Detalle de complejo', prospects: 'Prospectos',
+      contracts: 'Contratos', services: 'Servicios', maintenance: 'Mantenimiento e incidentes',
+      documents: 'Documentos', reports: 'Reportes', settings: 'Configuración', accounts: 'Cuentas bancarias',
+    };
+    const rootScreens = ['dashboard', 'rooms', 'payments', 'tenants', 'more'];
+    const onboardingSteps = [
+      { title: 'Bienvenido a Casitas', body: 'Administra todos tus complejos, habitaciones, inquilinos, pagos y más desde un solo lugar.' },
+      { title: 'Navegación', body: 'Usa la barra inferior para ir a Inicio, Habitaciones, Pagos e Inquilinos. Todo lo demás (Complejos, Contratos, Servicios, Reportes, Configuración...) está en "Más". El botón + te deja registrar pagos, inquilinos o habitaciones al instante desde cualquier pantalla.' },
+      { title: 'Semáforo de disponibilidad', body: 'Cada habitación muestra un color: disponible, ocupada, reservada o en mantenimiento. Puedes ver el tablero completo en Habitaciones y cambiar el color/estado de un toque.' },
+      { title: 'Pagos recurrentes', body: 'Al marcar un pago como pagado, se confirma y se genera automáticamente el pago del siguiente mes — y el dinero se abona a la cuenta bancaria o de efectivo correspondiente.' },
+      { title: 'Configuración', body: 'En Configuración puedes agregar cuentas bancarias, definir políticas por complejo, y ajustar tamaño de texto, fuente legible y contraste para que sea fácil de leer. Puedes volver a ver este tour cuando quieras desde ahí.' },
+    ];
+    const onboardingData = {
+      step: S.onboardingStep, total: onboardingSteps.length, current: onboardingSteps[S.onboardingStep],
+      showPrev: S.onboardingStep > 0, nextLabel: S.onboardingStep === onboardingSteps.length - 1 ? 'Comenzar' : 'Siguiente',
+      onNext: h.nextOnboarding, onPrev: h.prevOnboarding, onSkip: h.skipOnboarding,
+      dots: onboardingSteps.map((_, i) => ({ active: i === S.onboardingStep ? 'var(--color-accent)' : 'var(--color-neutral-300)' })),
+    };
+
+    const ui = {
+      loggedIn: !!S.session, showLogin: !S.session, showOnboarding: S.showOnboarding,
+      title: titles[screen] || 'Casitas',
+      showBack: !rootScreens.includes(screen),
+      showSearchIcon: screen === 'dashboard',
+      showFilterIcon: screen === 'rooms',
+      filterBtnBg: S.roomsFilterOpen ? 'var(--color-accent)' : 'var(--color-surface)',
+      filterBtnColor: S.roomsFilterOpen ? 'var(--color-bg)' : 'var(--color-text)',
+      showFab: rootScreens.includes(screen) && screen !== 'more',
+      fabOpen: S.fabOpen,
+      fabRotate: S.fabOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+      toast: S.toast,
+      modal: S.modal,
+      a11yZoom: S.a11y.fontSize === 'xlarge' ? 1.25 : S.a11y.fontSize === 'large' ? 1.12 : 1,
+      a11yWidth: S.a11y.fontSize === 'xlarge' ? (100 / 1.25) + '%' : S.a11y.fontSize === 'large' ? (100 / 1.12) + '%' : '100%',
+      a11yHeight: S.a11y.fontSize === 'xlarge' ? (100 / 1.25) + '%' : S.a11y.fontSize === 'large' ? (100 / 1.12) + '%' : '100%',
+      a11yText: S.a11y.highContrast ? '#000000' : '#201e1d',
+      a11yDivider: S.a11y.highContrast ? 'rgba(0,0,0,0.45)' : 'var(--color-divider)',
+      a11yFontBody: S.a11y.readableFont ? "'Atkinson Hyperlegible', system-ui, sans-serif" : "'Figtree', system-ui, sans-serif",
+      a11yFontHeading: S.a11y.readableFont ? "'Atkinson Hyperlegible', system-ui, sans-serif" : "'Caprasimo', system-ui, sans-serif",
+      navColors: {
+        dashboard: screen === 'dashboard' ? 'var(--color-accent-700)' : 'var(--color-neutral-500)',
+        rooms: screen === 'rooms' || screen === 'roomDetail' ? 'var(--color-accent-700)' : 'var(--color-neutral-500)',
+        payments: screen === 'payments' || screen === 'paymentDetail' ? 'var(--color-accent-700)' : 'var(--color-neutral-500)',
+        tenants: screen === 'tenants' || screen === 'tenantDetail' ? 'var(--color-accent-700)' : 'var(--color-neutral-500)',
+        more: !rootScreens.slice(0, 4).includes(screen) ? 'var(--color-accent-700)' : 'var(--color-neutral-500)',
+      },
+    };
+
+    // ---------- Dashboard ----------
+    const availableRooms = S.rooms.filter(r => r.status === 'available').length;
+    const occupiedRooms = S.rooms.filter(r => r.status === 'occupied').length;
+    const reservedRooms = S.rooms.filter(r => r.status === 'reserved').length;
+    const maintenanceRooms = S.rooms.filter(r => r.status === 'maintenance').length;
+    const pendingPayments = S.payments.filter(p => p.status === 'pending' || p.status === 'partial').length;
+    const overduePayments = S.payments.filter(p => p.status === 'overdue').length;
+    const expiringContracts = S.contracts.filter(c => c.status === 'expiring').length;
+    const expectedIncome = S.rooms.filter(r => r.status === 'occupied').reduce((a, r) => a + r.rent, 0);
+    const dash = {
+      loaded: S.loaded,
+      stats: [
+        { label: 'Complejos', value: S.complexes.length, screen: h.goStatComplexes, dot: null, bg: 'var(--color-surface)' },
+        { label: 'Habitaciones totales', value: S.rooms.length, screen: h.goStatRoomsAll, dot: null, bg: 'var(--color-surface)' },
+        { label: 'Disponibles', value: availableRooms, screen: h.goStatAvailable, dot: this.roomStatusMeta('available').color, bg: this.roomStatusMeta('available').color },
+        { label: 'Ocupadas', value: occupiedRooms, screen: h.goStatOccupied, dot: this.roomStatusMeta('occupied').color, bg: this.roomStatusMeta('occupied').color },
+        { label: 'Reservadas', value: reservedRooms, screen: h.goStatReserved, dot: this.roomStatusMeta('reserved').color, bg: this.roomStatusMeta('reserved').color },
+        { label: 'En mantenimiento', value: maintenanceRooms, screen: h.goStatMaintenance, dot: this.roomStatusMeta('maintenance').color, bg: this.roomStatusMeta('maintenance').color },
+      ],
+      moneyStats: [
+        { label: 'Pagos pendientes', value: pendingPayments, tone: '#d4a13d' },
+        { label: 'Pagos vencidos', value: overduePayments, tone: '#b5544a' },
+        { label: 'Contratos por vencer', value: expiringContracts, tone: '#cf8a4a' },
+        { label: 'Ingreso mensual esperado', value: this.money(expectedIncome), tone: '#7a9b6e', big: true },
+      ],
+      events: S.calendarEvents.slice(0, 4),
+      recentPayments: S.payments.slice(0, 4).map(p => ({ ...p, meta: this.paymentStatusMeta(p.status), tenantName: this.tenantName(p.tenantId) })),
+      recentMaintenance: S.maintenance.slice(0, 3).map(m => ({ ...m, meta: this.maintStatusMeta(m.status) })),
+      recentIncidents: S.incidents.slice(0, 3).map(i => ({ ...i, meta: this.incidentMeta(i.status) })),
+      notifications: S.notifications,
+      activity: S.activity.slice(0, 5),
+    };
+
+    // ---------- Rooms ----------
+    const rf = S.roomFilters;
+    const filteredRooms = S.rooms.filter(r =>
+      (rf.complex === 'all' || r.complexId === rf.complex) &&
+      (rf.status === 'all' || r.status === rf.status) &&
+      (rf.furnished === 'all' || (rf.furnished === 'yes' ? r.furnished : !r.furnished)) &&
+      r.rent <= rf.maxPrice
+    ).map(r => ({ ...r, meta: this.roomStatusMeta(r.status), complexName: this.complexName(r.complexId), rentFmt: this.money(r.rent), onOpen: () => h.openRoomDetail(r.id) }));
+    const board = ['available', 'reserved', 'soon', 'occupied', 'maintenance'].map(st => ({
+      status: st, meta: this.roomStatusMeta(st),
+      items: filteredRooms.filter(r => r.status === st),
+    }));
+    const statusList = ['available', 'reserved', 'soon', 'occupied', 'maintenance'];
+    const roomsData = {
+      loaded: S.loaded, view: S.roomsView, filterOpen: S.roomsFilterOpen, filters: rf,
+      list: filteredRooms, board, count: filteredRooms.length,
+      complexOptions: [{ id: 'all', name: 'Todos' }, ...S.complexes].map(c => ({
+        id: c.id, name: c.name, onSelect: () => h.setRoomFilterComplex(c.id),
+        bg: rf.complex === c.id ? 'var(--color-accent)' : 'var(--color-bg)',
+        fg: rf.complex === c.id ? 'var(--color-bg)' : 'var(--color-text)',
+      })),
+      statusOptions: statusList.map(s => ({ value: s, ...this.roomStatusMeta(s), active: rf.status === s, onSelect: () => h.setRoomFilterStatus(s) })),
+      furnishedOptions: [
+        { value: 'all', label: 'Todas', active: rf.furnished === 'all', onSelect: () => h.setRoomFilterFurnished('all') },
+        { value: 'yes', label: 'Amuebladas', active: rf.furnished === 'yes', onSelect: () => h.setRoomFilterFurnished('yes') },
+        { value: 'no', label: 'Sin amueblar', active: rf.furnished === 'no', onSelect: () => h.setRoomFilterFurnished('no') },
+      ],
+      maxPriceFmt: this.money(rf.maxPrice),
+      onPriceChange: (e) => h.setRoomFilterPrice(e.target.value),
+      setListView: () => h.setRoomsView('list'),
+      setBoardView: () => h.setRoomsView('board'),
+      isList: S.roomsView === 'list',
+      isBoard: S.roomsView === 'board',
+    };
+
+    // ---------- Room detail ----------
+    const room = S.rooms.find(r => r.id === S.selectedRoomId);
+    let roomDetailData = { loaded: false };
+    if (room) {
+      const tenant = S.tenants.find(t => t.roomId === room.id && t.active);
+      const history = S.tenants.filter(t => t.history.some(hh => hh.roomId === room.id)).map(t => {
+        const entry = t.history.find(hh => hh.roomId === room.id);
+        return { tenantName: t.name, range: (entry.start || '') + ' — ' + (entry.end || 'Presente') };
+      });
+      roomDetailData = {
+        loaded: true,
+        room: { ...room, meta: this.roomStatusMeta(room.status), complexName: this.complexName(room.complexId), rentFmt: this.money(room.rent), depositFmt: this.money(room.deposit), furnishedLabel: room.furnished ? 'Sí' : 'No', onShare: () => h.openShare(room.id) },
+        tenant: tenant ? { ...tenant, onOpen: () => h.openTenantDetail(tenant.id) } : null,
+        history,
+        statusOptions: ['available', 'reserved', 'soon', 'occupied', 'maintenance'].map(s => {
+          const meta = this.roomStatusMeta(s);
+          const active = room.status === s;
+          return { value: s, label: meta.label, color: meta.color, onSelect: () => h.changeRoomStatus(room.id, s), bg: active ? 'var(--color-accent)' : 'var(--color-bg)', fg: active ? 'var(--color-bg)' : 'var(--color-text)' };
+        }),
+      };
+    }
+
+    // ---------- Payments ----------
+    const pf = S.paymentsTab;
+    let filteredPayments = S.payments.filter(p => pf === 'all' || p.status === pf);
+    if (S.paymentsQuery) {
+      const q = S.paymentsQuery.toLowerCase();
+      filteredPayments = filteredPayments.filter(p => this.tenantName(p.tenantId).toLowerCase().includes(q));
+    }
+    filteredPayments = filteredPayments.map(p => ({ ...p, needsReminder: p.status === 'pending' || p.status === 'overdue' || p.status === 'partial', onRemind: () => { const t = S.tenants.find(tt => tt.id === p.tenantId); if (t) h.sendReminder(t, p.amount, p.dueDate); }, meta: this.paymentStatusMeta(p.status), tenantName: this.tenantName(p.tenantId), roomLabel: this.roomLabel(p.roomId), amountFmt: this.money(p.amount), onOpen: () => h.openPaymentDetail(p.id) }));
+    const payTabs = ['all', 'pending', 'overdue', 'partial', 'paid'];
+    const payTabLabels = { all: 'Todos', pending: 'Pendientes', overdue: 'Vencidos', partial: 'Parciales', paid: 'Pagados' };
+    const paymentsData = {
+      loaded: S.loaded, query: S.paymentsQuery, list: filteredPayments,
+      onQueryChange: (e) => h.setPaymentsQuery(e.target.value),
+      tabs: payTabs.map(t => ({
+        value: t, label: payTabLabels[t],
+        count: t === 'all' ? S.payments.length : S.payments.filter(p => p.status === t).length,
+        bg: pf === t ? 'var(--color-accent)' : 'var(--color-surface)', fg: pf === t ? 'var(--color-bg)' : 'var(--color-text)',
+        onSelect: () => h.setPaymentsTab(t),
+      })),
+    };
+
+    const payment = S.payments.find(p => p.id === S.selectedPaymentId);
+    let paymentDetailData = { loaded: false };
+    if (payment) {
+      const rm = S.rooms.find(r => r.id === payment.roomId);
+      const bank = this.findAccountForRoom(rm);
+      const canMarkPaid = payment.status !== 'paid';
+      paymentDetailData = {
+        loaded: true,
+        payment: { ...payment, meta: this.paymentStatusMeta(payment.status), tenantName: this.tenantName(payment.tenantId), roomLabel: this.roomLabel(payment.roomId), amountFmt: this.money(payment.amount), hasReceipts: payment.receipts.length > 0 },
+        bank, canMarkPaid, onMarkPaid: () => h.askMarkPaid(payment.id),
+        onSendReminder: () => { const t = S.tenants.find(tt => tt.id === payment.tenantId); if (t) h.sendReminder(t, payment.amount, payment.dueDate); },
+      };
+    }
+
+    // ---------- Tenants ----------
+    let filteredTenants = S.tenants.filter(t => S.tenantsTab === 'active' ? t.active : !t.active);
+    if (S.tenantsQuery) {
+      const q = S.tenantsQuery.toLowerCase();
+      filteredTenants = filteredTenants.filter(t => t.name.toLowerCase().includes(q));
+    }
+    filteredTenants = filteredTenants.map(t => ({ ...t, roomLabel: t.roomId ? this.roomLabel(t.roomId) : '—', onOpen: () => h.openTenantDetail(t.id) }));
+    const tenantsData = {
+      loaded: S.loaded, query: S.tenantsQuery, list: filteredTenants,
+      onQueryChange: (e) => h.setTenantsQuery(e.target.value),
+      tabs: [
+        { value: 'active', label: 'Activos (' + S.tenants.filter(t => t.active).length + ')', active: S.tenantsTab === 'active', onSelect: () => h.setTenantsTab('active') },
+        { value: 'inactive', label: 'Inactivos (' + S.tenants.filter(t => !t.active).length + ')', active: S.tenantsTab === 'inactive', onSelect: () => h.setTenantsTab('inactive') },
+      ].map(t => ({ ...t, bg: t.active ? 'var(--color-accent)' : 'var(--color-surface)', fg: t.active ? 'var(--color-bg)' : 'var(--color-text)' })),
+    };
+
+    const tenant = S.tenants.find(t => t.id === S.selectedTenantId);
+    let tenantDetailData = { loaded: false };
+    if (tenant) {
+      const contract = S.contracts.find(c => c.tenantId === tenant.id && c.status !== 'ended');
+      const digits = (s) => (s || '').replace(/\D/g, '');
+      tenantDetailData = {
+        loaded: true,
+        tenant: {
+          ...tenant, roomLabel: tenant.roomId ? this.roomLabel(tenant.roomId) : null,
+          history: tenant.history.map(hh => ({ label: this.roomLabel(hh.roomId), range: (hh.start || '') + ' — ' + (hh.end || 'Presente') })),
+          telHref: 'tel:+52' + digits(tenant.phone), smsHref: 'sms:+52' + digits(tenant.phone),
+          waHref: 'https://wa.me/52' + digits(tenant.whatsapp),
+        },
+        contract: contract ? { ...contract, meta: this.contractStatusMeta(contract.status) } : null,
+        onInactivate: () => h.askInactivate(tenant.id),
+        onSendReminder: () => h.sendReminder(tenant, tenant.rent, tenant.paymentDueDate),
+      };
+    }
+
+    // ---------- More ----------
+    const moreData = {
+      groups: [
+        { label: 'Propiedades', items: [
+          { label: 'Complejos', sub: 'Sedes, fotos y contacto', onGo: h.openComplexes },
+          { label: 'Prospectos', sub: 'Interesados y visitas', onGo: h.openProspects },
+          { label: 'Contratos', sub: 'Vigencias y renovaciones', onGo: h.openContracts },
+          { label: 'Cuentas bancarias', sub: 'Saldos y control de depósitos', onGo: h.openAccounts },
+        ]},
+        { label: 'Operación', items: [
+          { label: 'Servicios', sub: 'Luz, agua, internet y más', onGo: h.openServices },
+          { label: 'Mantenimiento e incidentes', sub: 'Solicitudes y reportes', onGo: h.openMaintenance },
+          { label: 'Documentos', sub: 'Contratos, IDs y comprobantes', onGo: h.openDocuments },
+        ]},
+        { label: 'Análisis', items: [
+          { label: 'Reportes', sub: 'Ocupación e ingresos', onGo: h.openReports },
+          { label: 'Configuración', sub: 'Cuentas, políticas y horarios', onGo: h.openSettings },
+        ]},
+      ],
+    };
+
+    // ---------- Complexes ----------
+    const complexesData = { loaded: S.loaded, onAdd: h.openAddComplex, list: S.complexes.map(c => ({ ...c, availableCount: S.rooms.filter(r => r.complexId === c.id && r.status === 'available').length, onOpen: () => h.openComplexDetail(c.id) })) };
+    const complex = S.complexes.find(c => c.id === S.selectedComplexId);
+    let complexDetailData = { loaded: false };
+    if (complex) {
+      const rooms = S.rooms.filter(r => r.complexId === complex.id).map(r => ({ ...r, meta: this.roomStatusMeta(r.status), onOpen: () => h.openRoomDetail(r.id) }));
+      const mapsUrl = complex.mapsLink || (complex.gps ? ('https://www.google.com/maps?q=' + encodeURIComponent(complex.gps)) : '');
+      complexDetailData = { loaded: true, complex: { ...complex, mapsUrl, hasMaps: !!mapsUrl }, rooms };
+    }
+
+    // ---------- Prospects ----------
+    const prospectStatuses = [
+      { value: 'all', label: 'Todos' }, { value: 'new', label: 'Nuevo' }, { value: 'visit_scheduled', label: 'Visita agendada' },
+      { value: 'visited', label: 'Visitado' }, { value: 'reserved', label: 'Apartado' }, { value: 'became_tenant', label: 'Inquilino' }, { value: 'not_interested', label: 'No interesado' },
+    ];
+    const prospectStatusOptions = prospectStatuses.filter(s => s.value !== 'all');
+    const prospectsData = {
+      loaded: S.loaded,
+      filters: prospectStatuses.map(s => ({ ...s, active: S.prospectsFilter === s.value, onSelect: () => h.setProspectsFilter(s.value), bg: S.prospectsFilter === s.value ? 'var(--color-accent)' : 'var(--color-surface)', fg: S.prospectsFilter === s.value ? 'var(--color-bg)' : 'var(--color-text)' })),
+      list: S.prospects.filter(p => S.prospectsFilter === 'all' || p.status === S.prospectsFilter).map(p => ({
+        ...p, roomLabel: this.roomLabel(p.interestedRoom), statusLabel: this.prospectMeta(p.status).label,
+        statusOptions: prospectStatusOptions.map(so => ({ value: so.value, label: so.label, onSelect: () => h.setProspectStatus(p.id, so.value) })),
+        onStatusChange: (e) => h.setProspectStatus(p.id, e.target.value),
+      })),
+    };
+
+    // ---------- Contracts ----------
+    const contractFilters = ['all', 'active', 'expiring', 'ended'];
+    const contractFilterLabels = { all: 'Todos', active: 'Activos', expiring: 'Por vencer', ended: 'Finalizados' };
+    const contractsData = {
+      loaded: S.loaded,
+      filters: contractFilters.map(f => ({ value: f, label: contractFilterLabels[f], onSelect: () => h.setContractsFilter(f), bg: S.contractsFilter === f ? 'var(--color-accent)' : 'var(--color-surface)', fg: S.contractsFilter === f ? 'var(--color-bg)' : 'var(--color-text)' })),
+      list: S.contracts.filter(c => S.contractsFilter === 'all' || c.status === S.contractsFilter).map(c => ({ ...c, meta: this.contractStatusMeta(c.status), tenantName: this.tenantName(c.tenantId), roomLabel: this.roomLabel(c.roomId), depositFmt: this.money(c.deposit) })),
+    };
+
+    // ---------- Services ----------
+    const servicesData = {
+      loaded: S.loaded,
+      complexFilters: [{ id: 'all', name: 'Todos' }, ...S.complexes].map(c => ({ id: c.id, name: c.name, onSelect: () => h.setServicesComplexFilter(c.id), bg: S.servicesComplexFilter === c.id ? 'var(--color-accent)' : 'var(--color-surface)', fg: S.servicesComplexFilter === c.id ? 'var(--color-bg)' : 'var(--color-text)' })),
+      list: S.services.filter(s => S.servicesComplexFilter === 'all' || s.complexId === S.servicesComplexFilter).map(s => ({ ...s, meta: this.serviceStatusMeta(s.status), complexName: this.complexName(s.complexId), canMarkPaid: s.status !== 'al_corriente', onMarkPaid: () => h.markServicePaid(s.id) })),
+    };
+
+    // ---------- Maintenance / incidents ----------
+    const maintData = {
+      loaded: S.loaded,
+      isMaint: S.maintTab === 'maintenance', isIncidents: S.maintTab === 'incidents',
+      tabs: [
+        { value: 'maintenance', label: 'Mantenimiento', onSelect: () => h.setMaintTab('maintenance'), active: S.maintTab === 'maintenance' },
+        { value: 'incidents', label: 'Incidentes', onSelect: () => h.setMaintTab('incidents'), active: S.maintTab === 'incidents' },
+      ].map(t => ({ ...t, bg: t.active ? 'var(--color-accent)' : 'var(--color-surface)', fg: t.active ? 'var(--color-bg)' : 'var(--color-text)' })),
+      maintenance: S.maintenance.map(m => ({ ...m, meta: this.maintStatusMeta(m.status), complexName: this.complexName(m.complexId), costFmt: m.cost ? this.money(m.cost) : '—', onCycle: () => h.cycleMaintStatus(m.id) })),
+      incidents: S.incidents.map(i => ({ ...i, meta: this.incidentMeta(i.status), priorityMeta: this.priorityMeta(i.priority), complexName: this.complexName(i.complexId), onCycle: () => h.cycleIncidentStatus(i.id) })),
+    };
+
+    // ---------- Documents ----------
+    const cats = [...new Set(S.documents.map(d => d.category))];
+    const catIcons = { 'Contratos': 'file-text', 'Identificaciones': 'id', 'CURP': 'id', 'Comprobantes de domicilio': 'home', 'Pagarés': 'file-text', 'Recibos de pago': 'receipt', 'Fotos de inspección': 'image' };
+    const documentsData = {
+      loaded: S.loaded, activeCategory: S.docsCategory, noActiveCategory: !S.docsCategory,
+      categories: cats.map(c => ({ name: c, count: S.documents.filter(d => d.category === c).length, onOpen: () => h.setDocsCategory(c), active: S.docsCategory === c })),
+      onBack: () => h.setDocsCategory(null),
+      items: S.docsCategory ? S.documents.filter(d => d.category === S.docsCategory) : [],
+    };
+
+    // ---------- Reports ----------
+    const occByComplex = S.complexes.map(c => {
+      const total = S.rooms.filter(r => r.complexId === c.id).length;
+      const occ = S.rooms.filter(r => r.complexId === c.id && r.status === 'occupied').length;
+      return { name: c.name, pct: total ? Math.round((occ / total) * 100) : 0 };
+    });
+    const monthlyIncomeTrend = [
+      { m: 'Feb', v: 58 }, { m: 'Mar', v: 64 }, { m: 'Abr', v: 69 }, { m: 'May', v: 72 }, { m: 'Jun', v: 78 }, { m: 'Jul', v: 84 },
+    ];
+    const reportsData = {
+      loaded: S.loaded, occByComplex, monthlyIncomeTrend,
+      pendingSum: this.money(S.payments.filter(p => p.status === 'pending' || p.status === 'partial').reduce((a, p) => a + p.amount, 0)),
+      overdueSum: this.money(S.payments.filter(p => p.status === 'overdue').reduce((a, p) => a + p.amount, 0)),
+      serviceExpense: this.money(S.services.length * 1400),
+      maintenanceExpense: this.money(S.maintenance.reduce((a, m) => a + m.cost, 0)),
+      expiringContracts: S.contracts.filter(c => c.status === 'expiring').map(c => ({ ...c, tenantName: this.tenantName(c.tenantId), roomLabel: this.roomLabel(c.roomId) })),
+    };
+
+    // ---------- Settings ----------
+    const scId = S.settingsComplexId;
+    const tg = S.settingsState[scId] || {};
+    const policyDefs = [
+      { key: 'pets', label: 'Se permiten mascotas' },
+      { key: 'visitors', label: 'Visitantes permitidos' },
+      { key: 'parking', label: 'Estacionamiento disponible' },
+      { key: 'smoking', label: 'Fumar permitido' },
+    ];
+    const serviceBillingDefs = [
+      { key: 'billElectricity', label: 'Electricidad incluida en renta' },
+      { key: 'billWater', label: 'Agua incluida en renta' },
+      { key: 'billInternet', label: 'Internet incluido en renta' },
+    ];
+    const complexAccount = scId ? (S.accounts.find(a => a.complexId === scId && (!a.roomIds || a.roomIds.length === 0)) || S.accounts.find(a => a.complexId === scId)) : null;
+    const settingsData = {
+      loaded: S.loaded, bank: complexAccount,
+      complexTabs: S.complexes.map(c => ({ id: c.id, name: c.name, onSelect: () => h.setSettingsComplex(c.id), bg: scId === c.id ? 'var(--color-accent)' : 'var(--color-surface)', fg: scId === c.id ? 'var(--color-bg)' : 'var(--color-text)' })),
+      policies: policyDefs.map(p => ({ ...p, on: !!tg[p.key], onToggle: () => h.toggleSetting(p.key), bg: tg[p.key] ? 'var(--color-accent)' : 'var(--color-neutral-300)' })),
+      billingRules: serviceBillingDefs.map(p => ({ ...p, on: !!tg[p.key], onToggle: () => h.toggleSetting(p.key), bg: tg[p.key] ? 'var(--color-accent)' : 'var(--color-neutral-300)' })),
+      officeHours: 'Lun–Vie 9:00–18:00 · Sáb 9:00–14:00',
+      reminderTemplate: S.reminderTemplate, onReminderTemplateChange: h.updateReminderTemplate,
+      onReplayTour: h.replayOnboarding, onLogout: h.logout,
+      accountModeLabel: S.session === 'empty' ? 'Prueba desde cero' : 'Cuenta demo',
+      a11y: {
+        sizes: ['normal', 'large', 'xlarge'].map(sz => ({
+          value: sz, label: sz === 'normal' ? 'Normal' : sz === 'large' ? 'Grande' : 'Muy grande',
+          active: S.a11y.fontSize === sz, onSelect: () => h.setFontSize(sz),
+          bg: S.a11y.fontSize === sz ? 'var(--color-accent)' : 'var(--color-bg)', fg: S.a11y.fontSize === sz ? 'var(--color-bg)' : 'var(--color-text)',
+        })),
+        readableFontOn: S.a11y.readableFont, onToggleReadable: h.toggleReadableFont, readableBg: S.a11y.readableFont ? 'var(--color-accent)' : 'var(--color-neutral-300)',
+        highContrastOn: S.a11y.highContrast, onToggleContrast: h.toggleHighContrast, contrastBg: S.a11y.highContrast ? 'var(--color-accent)' : 'var(--color-neutral-300)',
+      },
+    };
+
+    // ---------- Modal data ----------
+    let modalData = {
+      isAddPayment: S.modal === 'addPayment', isAddTenant: S.modal === 'addTenant', isAddRoom: S.modal === 'addRoom',
+      isAddComplex: S.modal === 'addComplex',
+      isShareRoom: S.modal === 'shareRoom', isConfirmInactive: S.modal === 'confirmInactive', isSearch: S.modal === 'search',
+      isConfirmMarkPaid: S.modal === 'confirmMarkPaid',
+      isAddAccount: S.modal === 'addAccount', isWithdraw: S.modal === 'withdraw',
+      onClose: h.closeModal,
+    };
+    if (S.modal === 'addAccount') {
+      const f = S.addAccountForm;
+      const roomsForComplex = f.complexId ? S.rooms.filter(r => r.complexId === f.complexId) : [];
+      modalData.addAccount = {
+        isBank: f.type === 'bank', alias: f.alias, bank: f.bank, holder: f.holder, clabe: f.clabe, account: f.account,
+        onType: (e) => h.updateAddAccountForm('type', e.target.value),
+        onAlias: (e) => h.updateAddAccountForm('alias', e.target.value),
+        onComplex: (e) => h.updateAddAccountForm('complexId', e.target.value),
+        onBank: (e) => h.updateAddAccountForm('bank', e.target.value),
+        onHolder: (e) => h.updateAddAccountForm('holder', e.target.value),
+        onClabe: (e) => h.updateAddAccountForm('clabe', e.target.value),
+        onAccount: (e) => h.updateAddAccountForm('account', e.target.value),
+        onSubmit: h.submitAddAccount,
+        complexes: S.complexes,
+        rooms: roomsForComplex.map(r => ({ id: r.id, label: r.number + ' · ' + r.name, checked: f.selectedRoomIds.includes(r.id), onToggle: () => h.toggleAddAccountRoom(r.id) })),
+        hasComplex: !!f.complexId,
+      };
+    }
+    if (S.modal === 'withdraw') {
+      const acc = S.accounts.find(a => a.id === S.selectedAccountId);
+      modalData.withdraw = acc ? {
+        alias: acc.alias, balanceFmt: this.money(acc.balance), amount: S.withdrawForm.amount, note: S.withdrawForm.note,
+        onAmount: (e) => h.updateWithdrawForm('amount', e.target.value),
+        onNote: (e) => h.updateWithdrawForm('note', e.target.value),
+        onSubmit: h.submitWithdraw,
+      } : null;
+    }
+    if (S.modal === 'confirmMarkPaid') {
+      const p = S.payments.find(x => x.id === S.selectedPaymentId);
+      modalData.confirmMarkPaid = p ? {
+        tenantName: this.tenantName(p.tenantId), period: p.period, amountFmt: this.money(p.amount),
+        nextPeriod: this.nextPeriodLabel(p.period), onConfirm: h.confirmMarkPaid,
+      } : null;
+    }
+    if (S.modal === 'addComplex') {
+      const f = S.addComplexForm;
+      modalData.addComplex = {
+        name: f.name, address: f.address, mapsLink: f.mapsLink, manager: f.manager, phone: f.phone, notes: f.notes,
+        onName: (e) => h.updateAddComplexForm('name', e.target.value),
+        onAddress: (e) => h.updateAddComplexForm('address', e.target.value),
+        onMapsLink: (e) => h.updateAddComplexForm('mapsLink', e.target.value),
+        onManager: (e) => h.updateAddComplexForm('manager', e.target.value),
+        onPhone: (e) => h.updateAddComplexForm('phone', e.target.value),
+        onNotes: (e) => h.updateAddComplexForm('notes', e.target.value),
+        onSubmit: h.submitAddComplex,
+      };
+    }
+    if (S.modal === 'addPayment') {
+      const f = S.addPaymentForm;
+      modalData.addPayment = {
+        amount: f.amount, method: f.method, status: f.status,
+        onTenant: (e) => h.updateAddPaymentForm('tenantId', e.target.value),
+        onAmount: (e) => h.updateAddPaymentForm('amount', e.target.value),
+        onMethod: (e) => h.updateAddPaymentForm('method', e.target.value),
+        onStatus: (e) => h.updateAddPaymentForm('status', e.target.value),
+        onSubmit: h.submitAddPayment,
+        tenants: S.tenants.filter(t => t.active),
+      };
+    }
+    if (S.modal === 'addTenant') {
+      const f = S.addTenantForm;
+      modalData.addTenant = {
+        name: f.name, phone: f.phone, email: f.email, occupation: f.occupation,
+        onName: (e) => h.updateAddTenantForm('name', e.target.value),
+        onPhone: (e) => h.updateAddTenantForm('phone', e.target.value),
+        onEmail: (e) => h.updateAddTenantForm('email', e.target.value),
+        onOccupation: (e) => h.updateAddTenantForm('occupation', e.target.value),
+        onRoom: (e) => h.updateAddTenantForm('roomId', e.target.value),
+        onSubmit: h.submitAddTenant,
+        rooms: S.rooms.filter(r => r.status === 'available' || r.status === 'soon').map(r => ({ ...r, complexName: this.complexName(r.complexId) })),
+      };
+    }
+    if (S.modal === 'addRoom') {
+      const f = S.addRoomForm;
+      modalData.addRoom = {
+        number: f.number, name: f.name, rent: f.rent,
+        onComplex: (e) => h.updateAddRoomForm('complexId', e.target.value),
+        onNumber: (e) => h.updateAddRoomForm('number', e.target.value),
+        onName: (e) => h.updateAddRoomForm('name', e.target.value),
+        onType: (e) => h.updateAddRoomForm('type', e.target.value),
+        onRent: (e) => h.updateAddRoomForm('rent', e.target.value),
+        onFurnished: (e) => h.updateAddRoomForm('furnished', e.target.checked),
+        onSubmit: h.submitAddRoom,
+        complexes: S.complexes,
+      };
+    }
+    if (S.modal === 'shareRoom') {
+      const r = S.rooms.find(x => x.id === S.selectedRoomId);
+      if (r) {
+        const cx = S.complexes.find(c => c.id === r.complexId);
+        const mapsUrl = cx ? (cx.mapsLink || (cx.gps ? 'https://www.google.com/maps?q=' + encodeURIComponent(cx.gps) : '')) : '';
+        const featuresLine = r.tags.length ? r.tags.join(', ') : 'sin extras registrados';
+        const servicesLine = r.included.length ? r.included.join(', ') : 'sin servicios incluidos';
+        const message = '✨ ' + r.name + ' — ' + this.money(r.rent) + '/mes\n'
+          + '📍 ' + (cx ? cx.address : '') + '\n'
+          + '🛋️ Servicios incluidos: ' + servicesLine + '\n'
+          + '🏷️ Características: ' + featuresLine + '\n'
+          + '📸 Te comparto fotos de la habitación en este chat.\n'
+          + (mapsUrl ? ('📌 Ubicación: ' + mapsUrl) : '');
+        modalData.shareRoom = {
+          ...r, meta: this.roomStatusMeta(r.status), complexName: cx ? cx.name : '', rentFmt: this.money(r.rent),
+          message, mapsUrl, hasMaps: !!mapsUrl,
+          whatsappUrl: 'https://wa.me/?text=' + encodeURIComponent(message),
+        };
+      } else modalData.shareRoom = null;
+    }
+    if (S.modal === 'confirmInactive') {
+      const t = S.tenants.find(x => x.id === S.selectedTenantId);
+      modalData.confirmInactive = { tenant: t, moveOutDate: S.moveOutDate, onDate: (e) => h.setMoveOutDate(e.target.value), onConfirm: h.confirmInactivate };
+    }
+    if (S.modal === 'search') {
+      modalData.search = { rooms: S.rooms.map(r => ({ ...r, complexName: this.complexName(r.complexId) })), tenants: S.tenants, complexes: S.complexes };
+    }
+
+    const roomNums = (ids) => ids.map(id => { const r = S.rooms.find(x => x.id === id); return r ? r.number : ''; }).filter(Boolean).join(', ');
+    const accountsData = {
+      loaded: S.loaded, onAdd: h.openAddAccount,
+      totalFmt: this.money(S.accounts.reduce((a, c) => a + (c.balance || 0), 0)),
+      list: S.accounts.map(a => {
+        let scopeLabel = 'General (todas las propiedades)';
+        if (a.complexId) {
+          scopeLabel = this.complexName(a.complexId) + (a.roomIds && a.roomIds.length ? ' · Hab. ' + roomNums(a.roomIds) : ' · Todo el complejo');
+        }
+        return {
+          id: a.id, alias: a.alias, isCash: a.type === 'cash', typeLabel: a.type === 'cash' ? 'Efectivo' : 'Cuenta bancaria',
+          scopeLabel, bank: a.bank, holder: a.holder, clabe: a.clabe, balanceFmt: this.money(a.balance),
+          onWithdraw: () => h.openWithdraw(a.id),
+          movements: a.movements.slice(0, 5).map(m => ({ ...m, sign: m.type === 'deposit' ? '+' : '−', amountFmt: this.money(m.amount), color: m.type === 'deposit' ? '#7a9b6e' : '#b5544a' })),
+        };
+      }),
+    };
+
+    return { ui, screens, handlers: h, dash, roomsData, roomDetailData, paymentsData, paymentDetailData, tenantsData, tenantDetailData, moreData, complexesData, complexDetailData, prospectsData, contractsData, servicesData, maintData, documentsData, reportsData, settingsData, accountsData, modalData, onboardingData };
+  }
+}
+
+</script>
+</body>
+</html>

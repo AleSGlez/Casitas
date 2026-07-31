@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="padding:var(--space-4)">
+  <div style="display:flex;gap:7px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px">
+    <sc-for list="{{ data.filters }}" as="f" hint-placeholder-count="6">
+      <button type="button" onClick="{{ f.onSelect }}" style="flex:none;font-size:12px;padding:7px 12px;border-radius:999px;border:1px solid var(--color-divider);cursor:pointer;background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</button>
+    </sc-for>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <sc-for list="{{ data.list }}" as="p" hint-placeholder-count="4">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div class="card-title" style="font-size:15px">{{ p.name }}</div>
+            <div style="font-size:11.5px;opacity:0.6">{{ p.roomLabel }}</div>
+          </div>
+          <span class="tag tag-accent-2">{{ p.statusLabel }}</span>
+        </div>
+        <div style="font-size:12px;opacity:0.7">Visita: {{ p.visitDate }} · {{ p.phone }}</div>
+        <select class="input" value="{{ p.status }}" onChange="{{ p.onStatusChange }}" style="margin-top:2px">
+          <sc-for list="{{ p.statusOptions }}" as="so" hint-placeholder-count="6">
+            <option value="{{ so.value }}">{{ so.label }}</option>
+          </sc-for>
+        </select>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>
