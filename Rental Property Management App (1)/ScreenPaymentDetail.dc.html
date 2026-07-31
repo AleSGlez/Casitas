@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="padding:var(--space-4)">
+  <sc-if value="{{ data.loaded }}" hint-placeholder-val="{{ false }}">
+    <div class="card elev-sm" style="margin-bottom:14px">
+      <div class="card-kicker">{{ data.payment.period }}</div>
+      <div class="card-title" style="font-size:26px">{{ data.payment.amountFmt }}</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+        <span style="width:8px;height:8px;border-radius:999px;background:{{ data.payment.meta.color }}"></span>
+        <span style="font-size:12.5px">{{ data.payment.meta.label }}</span>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="opacity:0.6">Inquilino</span><strong>{{ data.payment.tenantName }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="opacity:0.6">Habitación</span><strong>{{ data.payment.roomLabel }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="opacity:0.6">Vencimiento</span><strong>{{ data.payment.dueDate }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="opacity:0.6">Método</span><strong>{{ data.payment.method }}</strong></div>
+    </div>
+
+    <button type="button" class="btn btn-secondary btn-block" onClick="{{ data.onSendReminder }}" style="margin-bottom:10px">Enviar recordatorio por WhatsApp</button>
+
+    <sc-if value="{{ data.canMarkPaid }}">
+      <button type="button" class="btn btn-primary btn-block" onClick="{{ data.onMarkPaid }}">Marcar como pagado</button>
+    </sc-if>
+
+    <h5 style="margin:16px 0 8px">Comprobantes</h5>
+    <sc-if value="{{ data.payment.hasReceipts }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+        <sc-for list="{{ data.payment.receipts }}" as="rc" hint-placeholder-count="1">
+          <div style="display:flex;align-items:center;gap:8px;background:var(--color-surface);border-radius:var(--radius-sm);padding:9px 12px;font-size:12.5px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>{{ rc }}
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <div style="border:1.5px dashed var(--color-divider);border-radius:var(--radius-md);padding:16px;text-align:center;font-size:12.5px;opacity:0.6;margin-bottom:16px">Arrastra o toca para subir imagen, PDF o captura de transferencia</div>
+
+    <sc-if value="{{ data.bank }}">
+      <h5 style="margin:0 0 8px">Cuenta destino</h5>
+      <div class="card" style="gap:6px">
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Banco</span><strong>{{ data.bank.bank }}</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Titular</span><strong>{{ data.bank.holder }}</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">CLABE</span><strong>{{ data.bank.clabe }}</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Alias</span><strong>{{ data.bank.alias }}</strong></div>
+      </div>
+    </sc-if>
+  </sc-if>
+</div>
+
+</x-dc>
+</body>
+</html>

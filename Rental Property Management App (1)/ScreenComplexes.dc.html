@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="padding:var(--space-4);display:flex;flex-direction:column;gap:14px">
+  <button type="button" class="btn btn-primary btn-block" onClick="{{ data.onAdd }}" style="margin-bottom:2px">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Nuevo complejo
+  </button>
+  <sc-for list="{{ data.list }}" as="c" hint-placeholder-count="3">
+    <button type="button" onClick="{{ c.onOpen }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
+      <div style="height:110px;background:linear-gradient(135deg,var(--color-accent-300),var(--color-accent-2-200));display:flex;align-items:flex-end;padding:10px 14px;color:var(--color-accent-900)">
+        <span style="font-family:var(--font-heading);font-size:18px">{{ c.name }}</span>
+      </div>
+      <div style="background:var(--color-surface);padding:12px 14px">
+        <div style="font-size:12px;opacity:0.65;margin-bottom:6px">{{ c.address }}</div>
+        <div style="display:flex;justify-content:space-between;font-size:12px">
+          <span>{{ c.manager }}</span>
+          <span style="color:var(--color-accent-2-700)">{{ c.availableCount }} disponibles</span>
+        </div>
+      </div>
+    </button>
+  </sc-for>
+</div>
+
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="padding:var(--space-4)">
+  <div style="display:flex;gap:7px;overflow-x:auto;margin-bottom:16px;padding-bottom:2px">
+    <sc-for list="{{ data.complexTabs }}" as="c" hint-placeholder-count="3">
+      <button type="button" onClick="{{ c.onSelect }}" style="flex:none;font-size:12px;padding:7px 13px;border-radius:999px;border:1px solid var(--color-divider);cursor:pointer;background:{{ c.bg }};color:{{ c.fg }}">{{ c.name }}</button>
+    </sc-for>
+  </div>
+
+  <div class="card" style="margin-bottom:18px;flex-direction:row;align-items:center;justify-content:space-between">
+    <span style="font-size:12.5px">Sesión activa: {{ data.accountModeLabel }}</span>
+    <button type="button" class="btn btn-ghost" onClick="{{ data.onLogout }}">Cerrar sesión</button>
+  </div>
+  <button type="button" class="btn btn-secondary btn-block" onClick="{{ data.onReplayTour }}" style="margin-bottom:18px">Ver tour de bienvenida</button>
+
+  <h5 style="margin:0 0 8px">Accesibilidad y lectura</h5>
+  <div class="card" style="margin-bottom:18px;gap:12px">
+    <div>
+      <div style="font-size:12.5px;opacity:0.7;margin-bottom:6px">Tamaño de texto</div>
+      <div class="seg" style="display:inline-flex">
+        <sc-for list="{{ data.a11y.sizes }}" as="sz" hint-placeholder-count="3">
+          <button type="button" onClick="{{ sz.onSelect }}" style="all:unset;box-sizing:border-box;cursor:pointer;font-size:12.5px;padding:7px 13px;border-radius:999px;background:{{ sz.bg }};color:{{ sz.fg }}">{{ sz.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+    <button type="button" onClick="{{ data.a11y.onToggleReadable }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px">Fuente más legible (Atkinson Hyperlegible)</span>
+      <span style="width:36px;height:20px;border-radius:999px;background:{{ data.a11y.readableBg }};position:relative;flex:none"></span>
+    </button>
+    <button type="button" onClick="{{ data.a11y.onToggleContrast }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px">Aumentar contraste de texto</span>
+      <span style="width:36px;height:20px;border-radius:999px;background:{{ data.a11y.contrastBg }};position:relative;flex:none"></span>
+    </button>
+  </div>
+
+  <h5 style="margin:0 0 8px">Cuenta bancaria de renta</h5>
+  <sc-if value="{{ data.bank }}" hint-placeholder-val="{{ true }}">
+    <div class="card" style="gap:6px;margin-bottom:18px">
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Banco</span><strong>{{ data.bank.bank }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Titular</span><strong>{{ data.bank.holder }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">CLABE</span><strong>{{ data.bank.clabe }}</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="opacity:0.6">Alias</span><strong>{{ data.bank.alias }}</strong></div>
+    </div>
+  </sc-if>
+
+  <h5 style="margin:0 0 8px">Reglas de facturación</h5>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:18px">
+    <sc-for list="{{ data.billingRules }}" as="b" hint-placeholder-count="3">
+      <button type="button" onClick="{{ b.onToggle }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:var(--color-surface);border-radius:var(--radius-md);padding:11px 13px">
+        <span style="font-size:13px">{{ b.label }}</span>
+        <span style="width:36px;height:20px;border-radius:999px;background:{{ b.bg }};position:relative;flex:none"></span>
+      </button>
+    </sc-for>
+  </div>
+
+  <h5 style="margin:0 0 8px">Recordatorio de pago (WhatsApp)</h5>
+  <div class="card" style="gap:10px;margin-bottom:18px">
+    <div class="field">
+      <label style="font-size:12px;opacity:0.7">Mensaje predeterminado</label>
+      <textarea class="input" rows="3" value="{{ data.reminderTemplate }}" onChange="{{ data.onReminderTemplateChange }}" style="resize:vertical"></textarea>
+      <div style="font-size:11px;opacity:0.55;margin-top:4px">Usa {nombre}, {monto} y {fecha} — se reemplazan automáticamente. Al tocar "Recordar" en Pagos o en el perfil del inquilino, WhatsApp se abre con el mensaje listo para enviar.</div>
+    </div>
+  </div>
+
+  <h5 style="margin:0 0 8px">Horario de oficina</h5>
+  <div class="card" style="margin-bottom:18px"><div class="card-body" style="font-size:13px;opacity:1">{{ data.officeHours }}</div></div>
+
+  <h5 style="margin:0 0 8px">Políticas de la propiedad</h5>
+  <div style="display:flex;flex-direction:column;gap:9px">
+    <sc-for list="{{ data.policies }}" as="p" hint-placeholder-count="4">
+      <button type="button" onClick="{{ p.onToggle }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:var(--color-surface);border-radius:var(--radius-md);padding:11px 13px">
+        <span style="font-size:13px">{{ p.label }}</span>
+        <span style="width:36px;height:20px;border-radius:999px;background:{{ p.bg }};position:relative;flex:none"></span>
+      </button>
+    </sc-for>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>
